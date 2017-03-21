@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+    <script src="STEMEd@q_files/htmlwidgets/htmlwidgets.js"></script>
+    <link href="STEMEd@q_files/plotlyjs/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="STEMEd@q_files/plotlyjs/plotly-latest.min.js"></script>
+    <script src="STEMEd@q_files/plotly-binding/plotly.js"></script>
+    <script src="STEMEd@q_files/jquery/jquery.min.js"></script>
+    <link href="STEMEd@q_files/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="STEMEd@q_files/crosstalk/js/crosstalk.min.js"></script>
+    <script src="STEMEd@q_files/typedarray/typedarray.min.js"></script>
+    <link rel="stylesheet" href="pres.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: center, middle
+layout: false
+
+.title[Data, Workflows and R]
+
+.pull-right[.author[Jake Kaupp]
+
+.date[2017-03-20]]
+
+---
+class: center, middle, inverse
+
+#.pull-left[The Story So Far....]
+
+???
+I traveled a strange road to get to where I am.
+
+I'm not a programmer, a sysadmin or software developer. I'm an engineer, an educational researcher with a head for numbers, graphics and design.
+
+How did I get involved with data, workflows, R and open-source software?
+
+---
+class: center, bottom
+background-image: url(images/drowning-in-data.jpg)
+background-size: cover
+
+???
+
+I was asked to help the programs make sense of their assessment data, and 'make some reports' illustrating student performance.  It started with making histograms in SPSS, putting that into pages and producing PDF reports.  I quickly realized that this would be far too time intensive and need to script things.  I started to write SAS Macros for SPSS which was it's own separate circle of hell, threw my hands up in frustration and took Brian's suggestion to look into R.
+---
+class: center, bottom
+background-image: url(images/spaceman.jpg)
+background-repeat: no-repeat
+background-size: cover
+
+???
+
+It took me a while, but I started to develop the capacity to do a lot of things, from making rudimentary graphs, processing and cleaning data, to developing reports, writing papers, producing graphics, etc. I could do things quickly myself by scripting, but then I had issues of scale and automation.
+
+---
+class: center, bottom
+background-image: url(images/legos.jpg)
+background-size: cover
+
+???
+
+I had to learn to get from this....
+
+---
+class: center, bottom
+background-image: url(images/lego_ny.jpg)
+background-size: cover
+
+???
+
+To this! How the heck was I going to do this?
+
+---
+class: center, middle, inverse
+
+#.oswald_bold[Software Development Principles,&lt;br&gt;] .scope[Research Methodologies,&lt;br&gt;].oswald_bold[Analytical Methods &amp;&lt;br&gt;] .scope[Open Source Tools]
+
+???
+
+I won't go on, but this boils down to adopting parts of agile and lean, taking a framework driven approach to answer questions, adopting coding and analysis paradigms from data science, and using lightweight, effective and amazing open source tools to boost efficiency and minimize cost.
+
+---
+class: center, middle
+background-image: url(images/open_tools.jpg)
+background-size: cover
+
+???
+Things that allow you to work outside of interfaces and editing, work in plaintext, focus on writing and coding, style it how you want later, export it to whatever format you want.  It also integrates version control tools and collaborative platforms, and uses tools to automate, schedule and build projects with a single command.
+
+These tools encourage reproducibility, and a focus on literate programming (ingerating data, code, analysis, visualization and communication) in the form of interactive notebooks.  The key for reproducibility is packaging everything into one location (git), making it widely available (github). You can now even make sure the environment is replicable with docker!
+
+
+---
+class: center, middle
+
+.pull-left[.oswald_bold[Data Project Workflow&lt;br&gt;]![data](images/managing-data-02-map.png)]
+.pull-right[.oswald_bold[Research Workflow&lt;br&gt;]![repro](images/Three-Stages-of-Quantiative-Analytics2.png)]&lt;br&gt;
+![r_work](images/data-science-R.png)
+
+
+???
+
+All of these tools together form the backbone for any data-related project, and can be used in concert for what I've been saying this entire time.  A workflow.  You can use these tools in concert to start up projects quickly; clean, store and analyze data; explore, visualize and communicate results, and do so in an automated, replicable fashion that is set up from the start to encourage collaboration.
+---
+class: center, bottom
+background-image: url(images/Spectrum_of_reproducible_research.png)
+background-size: 100%
+
+[https://ropensci.github.io/reproducibility-guide/sections/introduction/]()
+???
+
+It's also a cornerstone in the Open Science Movement for Open or Reproducible research.
+
+---
+class: left, middle, inverse
+
+# Why is this Relevant?
+
+---
+class: center, middle
+
+.stylish_title[Post-Truth]
+https://fatiherikli.github.io/post-truth/  
+https://www.theguardian.com/politics/2017/jan/19/crisis-of-statistics-big-data-democracy
+
+---
+class: center, middle
+.stylish_title[Reproducibility Crisis]  
+http://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970
+
+
+---
+class: left, middle
+background-image: url(images/beaker.jpg)
+background-size: 100%
+.yellow[Closer to Home]
+
+???
+Uncertainty and questions surround institutional statistics at Queen's.  Programs provided statistics by a number of sources.  Yet verification of these items is incredibly difficult because most analysts do not follow a reproducible model.  Data is pulled from a central source, manipulated in excel and provided as a table with little context.
+
+---
+class: left, middle, inverse
+
+#So what does R have to do with all of this?
+
+???
+
+I think it can help solve a lot of these issues.  Introduce researchers and graduate students to scientific computing. Introduce analysts to literate programming and reproducible analysis.  Get the community thinking about how to package their research and engage in collaborative analysis.  
+
+It is also the tool that I've based my entire job around.
+
+---
+background-image: url(images/toothpaste-orange-juice.jpg)
+background-size: 100%
+
+???
+
+I know that Quality Assurance and Statistical Computing are a strange pairing. I pitched the job in my interview to heavily use R, and rarely a day goes by that I don't work in it.  It powers all the FEAS statistics and reporting, it is the engine behind the accreditation reporting, and it is the platform that provides a lot of actionable information to programs for QA purposes.
+
+---
+class: left, middle
+
+# So what is R?
+.pull-left[![R](images/R-logo.png)]
+.pull-right[.big_text[
+* A Statistical computing language
+
+* A computing environment  
+
+* A high quality graphical system  
+
+* An open-source standard for Statistics and Data Science
+
+* An extensible and integrated framework]]
+
+---
+class: left, middle
+
+# Also RStudio*!
+.pull-left[![rstudio](images/RStudio-Ball.png)]
+.pull-right[.big_text[
+* A powerful open-source IDE and companion to R.
+* Integrates author tools into a powerful suite.
+* Focuses on Workflows 
+* Excellent help and support for learning]]
+
+.footnote[*A company that contributes lots of good packages and tools to the R community. For free.]
+
+---
+class: left, middle, inverse
+
+#What can it do?
+
+???
+
+It can do a lot.  I learned very quickly that is wasn't a question of Can I do that in R? it was a question of How do I do that in R?.  The massive amount of functionality provided by R is in part due to its extensible nature and passionate user base that has developed 10,000+ packages that give R a tremendous reach.  All of this in open-source, all freely available.
+
+---
+
+#Basic Computing!
+All of the basic things programming langauges can do.  Math, Matricies, Loops, Case Statements.
+
+```r
+2 + 2
+```
+
+```
+## [1] 4
+```
+
+```r
+array &lt;- runif(10000, 1, 100)
+
+summary(array)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.009  25.880  50.960  50.680  75.310  99.980
+```
+---
+
+# Readable Code!
+Using pipes (%&gt;%) to turn inside-out hard to read code into top-down readable code
+
+```r
+library(dplyr)
+
+mtcars %&gt;%
+  select(mpg, wt, cyl) %&gt;%
+  group_by(cyl) %&gt;%
+  mutate(mpg_by_weight = mpg/wt) %&gt;%
+  summarize_each(funs(mean))
+```
+
+```
+## # A tibble: 3 × 4
+##     cyl      mpg       wt mpg_by_weight
+##   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
+## 1     4 26.66364 2.285727     12.682731
+## 2     6 19.74286 3.117143      6.439265
+## 3     8 15.10000 3.999214      3.946454
+```
+---
+#Plotting!
+.pull-left[Fully customizable plots that follow effective practise of visualization and graphic design.
+
+
+```r
+library(ggplot2)
+library(viridis)
+
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(aes(color = clarity)) +
+  scale_color_viridis(discrete = TRUE)
+```
+]
+.pull-right[
+&lt;img src="STEMEd@q_files/figure-html/plots2-1.png" width="672" /&gt;
+]
+
+---
+#More plotting!
+.pull-left[Can facilitate comparison via small multiples (panels)
+
+
+```r
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(color = clarity) +
+  facet_wrap(~color) +
+  scale_color_viridis(discrete = TRUE)
+```
+]
+.pull-right[
+&lt;img src="STEMEd@q_files/figure-html/sm2-1.png" width="672" /&gt;
+]
+
+---
+
+# Interactive Plotting!
+.pull-left[Links to popular javascript libraries for interactive graphics
+
+
+```r
+library(plotly)
+
+d &lt;- diamonds[sample(nrow(diamonds), 500), ]
+plot_ly(d, x = ~carat, y = ~price, color = ~carat,
+        size = ~carat, text = ~paste("Clarity: ", clarity))
+```
+]
+.pull-right[
+<div id="htmlwidget-4d97c4eac7991c2f90e9" style="width:384px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4d97c4eac7991c2f90e9">{"x":{"visdat":{"b939726ed4e8":["function () ","plotlyVisDat"]},"cur_data":"b939726ed4e8","attrs":{"b939726ed4e8":{"x":{},"y":{},"text":{},"color":{},"size":{},"alpha":1,"sizes":[10,100]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"title":"carat"},"yaxis":{"domain":[0,1],"title":"price"},"hovermode":"closest","dragmode":"zoom","showlegend":false,"legend":{"y":0.5,"yanchor":"top"}},"source":"A","config":{"modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"modeBarButtonsToRemove":["sendDataToCloud"]},"data":[{"x":[0.92,0.3,0.31,1.01,1.08,0.5,0.61,1.14,0.31,1.37,0.71,0.31,0.7,1.05,0.41,0.9,1,1.51,1.04,2.01,0.9,1.2,0.9,0.31,0.4,0.41,0.26,1.05,0.71,0.62,1.53,0.92,0.51,0.33,2.04,0.9,2.08,0.5,0.59,0.38,0.57,1.01,0.36,0.5,0.31,0.92,1,2.1,2.01,1.54,0.51,0.7,0.71,0.61,0.52,0.75,0.33,0.39,0.32,0.41,0.56,0.52,0.5,0.31,1.01,0.9,0.9,0.55,0.33,1,0.36,1.11,1.63,0.43,1.51,1.01,0.55,0.71,0.98,0.7,0.51,0.37,0.31,0.9,0.44,1.03,1,0.5,1.03,1.09,0.5,0.72,1.06,0.3,0.52,1.36,0.76,0.9,2.09,0.96,0.36,0.3,0.31,1.05,0.8,1.05,2.01,1.01,2,0.3,1.6,1.1,0.7,0.42,0.3,1.01,1.01,1.02,0.7,0.51,0.38,0.58,0.38,1.5,0.38,1.2,0.41,0.3,0.73,1.21,0.7,0.36,2,0.31,0.3,1.11,0.4,0.71,0.53,0.42,0.51,1.35,0.52,1.5,0.3,1.5,1.83,0.45,0.4,0.73,0.34,0.53,0.53,1.29,0.3,2.01,1.05,1.18,0.33,0.43,0.3,0.34,0.4,0.52,2.2,2.04,0.29,1.03,0.41,0.33,1.22,2.14,0.71,0.31,0.78,0.72,0.3,0.3,0.3,0.37,1.3,0.31,0.3,2.01,0.31,0.72,0.55,0.71,1.01,1.2,1.42,0.52,0.33,1.5,0.37,0.72,0.3,1.28,0.75,0.55,0.32,0.91,0.39,1.2,0.87,0.9,0.32,0.55,0.4,0.3,1.09,0.32,0.38,1.01,0.5,0.9,0.7,0.3,0.3,0.32,0.95,0.3,0.31,0.31,0.3,1.51,1.56,0.85,0.4,1.12,0.33,1.03,0.34,1.35,0.31,0.74,0.91,0.59,0.51,0.31,0.54,1.73,0.3,0.5,0.46,1.1,0.32,1.51,0.32,0.52,0.25,0.31,0.5,1.5,0.37,0.31,0.59,0.34,0.4,0.41,1.11,1.01,0.3,1.11,1.5,0.4,0.42,0.4,0.32,0.43,0.83,0.49,0.76,0.7,0.78,1,0.37,0.88,0.27,0.41,0.65,1.21,0.3,1.5,0.33,0.77,0.71,0.72,0.53,0.42,2.08,0.51,1.5,2.06,0.26,0.25,0.54,0.31,1.02,1.54,1,1.5,2.01,0.32,1,0.72,2.03,1.03,1.21,0.25,0.35,0.7,0.3,0.5,0.71,0.34,0.79,0.24,1.39,0.51,0.93,1.21,1.43,1.01,0.43,0.36,2.02,1.31,0.71,0.81,0.3,1.02,0.34,1.01,0.92,1.5,0.9,1.51,1.02,0.37,2.02,0.4,0.52,0.38,0.74,0.31,0.44,1.2,1.04,0.31,0.32,1.63,0.7,0.94,1.2,0.7,1.02,0.57,0.84,1.02,0.7,1.11,0.3,1.01,2.11,0.9,0.36,1.03,0.74,0.77,1.09,0.9,1.51,2.05,0.44,0.47,1.01,0.3,0.9,1.19,1.5,1.01,0.34,0.61,0.71,0.3,0.38,0.39,0.3,0.39,1.7,1,0.34,0.4,0.31,0.41,1.01,0.35,0.3,0.76,0.4,1.01,0.46,1.02,0.52,1.22,0.3,0.5,1,1.51,0.53,0.35,0.3,1.01,0.43,0.51,1.51,0.9,0.71,0.53,0.37,0.3,0.56,0.4,0.4,1.07,0.53,1.01,1.03,1.52,0.7,1.5,1.01,0.62,1.01,1.15,0.66,0.71,0.7,0.25,0.37,0.58,0.26,0.32,2.01,0.43,0.41,1.53,1.51,1.03,0.7,0.71,0.31,1.24,0.52,1.15,1.12,1.22,1.5,0.31,1.22,0.41,0.5,0.41,1,0.3,1.31,1.26,1.04,2,0.5,1.04,0.71,1.23,0.4,0.7,0.41,2,0.9,0.82,1.21,0.54,1.69,0.31,0.77,0.5,0.54,1.22,1.01,0.9,0.4,0.56,1.54,0.4,0.38,0.71,0.55,2.02,1,0.3],"y":[3625,675,1046,4038,4241,1396,2364,4906,959,7951,2491,625,978,5468,899,6872,4704,9936,10350,10389,5151,9570,2729,435,945,1431,453,3828,2804,1327,7617,3924,3446,838,17315,3500,18124,1155,1769,1400,1760,4497,852,1316,891,4637,6465,14359,12229,12522,1271,1836,2352,2167,975,2760,579,787,825,876,2011,1586,1637,1012,6066,3619,4847,1624,579,5005,747,6713,9694,919,10096,4327,1213,2930,3485,3068,1569,671,816,4770,1294,6218,3790,1345,3530,5238,1624,2562,5480,552,1947,10455,2631,4194,13119,4693,851,524,816,4510,3091,7644,15939,5387,12940,780,7903,8775,3312,1400,573,6366,8201,17100,2249,2066,680,2772,693,5141,733,7258,1007,554,3288,6708,1040,758,10494,625,622,5408,666,1881,1367,847,1882,9471,1809,9009,658,5833,12379,1179,945,2791,765,1659,1678,6327,658,17078,3886,12175,928,1298,755,626,666,1651,18193,18115,629,8469,951,925,8014,18528,3033,571,4234,3176,776,675,694,936,14196,1116,572,15116,988,2385,1374,2547,4004,5107,7773,2371,743,8232,601,1799,863,5018,2394,1609,420,4423,787,4548,2321,3326,943,1270,877,945,4586,602,944,5366,1627,4324,2591,378,844,758,3984,473,988,891,764,8010,15609,2945,877,4798,463,7880,447,10012,802,2800,3954,1828,1781,789,2356,13102,373,1080,974,7528,432,6851,449,2012,451,853,1629,8181,811,541,2515,835,1017,647,6982,5560,413,6241,8736,723,1081,890,828,994,2386,949,2897,3830,3056,2841,815,4334,566,920,4275,7589,613,4731,730,2513,2792,3427,1190,1179,15654,1241,9926,14120,453,575,1111,435,4061,7589,9139,6306,13387,773,5804,2295,14308,6793,5028,436,630,2560,526,1035,3304,765,2539,668,8271,1656,4611,6189,8599,4626,1433,587,10577,6137,2262,2283,776,4455,417,8956,3610,7076,3880,14375,4688,1041,11463,1080,1794,898,2558,865,1063,5638,4244,1046,730,10357,2352,3624,4514,3199,5840,1847,2753,4904,2110,5908,675,8869,13046,3867,789,9413,2728,1996,5799,4324,18729,15949,974,1261,5010,473,3649,6078,10214,4339,985,2025,3290,1026,1000,834,447,821,14266,5880,495,900,698,1243,6449,644,764,2466,814,3197,1205,4645,1401,3156,432,1094,5880,12261,1721,1247,1120,7715,1245,1312,14542,4077,2428,1813,537,1013,1131,945,792,3545,1857,4808,4008,11206,2384,7840,4270,2131,4129,6106,1981,2141,2410,548,668,2021,679,936,18027,943,784,9747,10020,6153,2042,2628,625,5305,1387,6917,8080,9756,11748,642,7152,947,1154,1019,7812,776,4548,5015,4770,17710,1122,3392,2590,5191,900,2591,1367,11544,3425,2959,6566,1099,12394,692,3917,1569,1409,10111,6416,4963,1263,2202,11790,707,933,4231,1975,16665,2717,863],"text":["Clarity:  SI2","Clarity:  SI1","Clarity:  VVS1","Clarity:  SI2","Clarity:  SI2","Clarity:  VS2","Clarity:  VS2","Clarity:  VS2","Clarity:  VVS1","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  I1","Clarity:  VS2","Clarity:  VS1","Clarity:  VVS2","Clarity:  SI1","Clarity:  SI2","Clarity:  VVS1","Clarity:  SI1","Clarity:  VS1","Clarity:  VVS1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  IF","Clarity:  VS1","Clarity:  SI2","Clarity:  VS2","Clarity:  SI2","Clarity:  SI2","Clarity:  VS1","Clarity:  IF","Clarity:  VVS1","Clarity:  VS2","Clarity:  VS1","Clarity:  SI2","Clarity:  SI1","Clarity:  VS2","Clarity:  VVS1","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  VS2","Clarity:  IF","Clarity:  SI1","Clarity:  VS1","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  VS1","Clarity:  SI2","Clarity:  SI1","Clarity:  SI1","Clarity:  VVS2","Clarity:  VS1","Clarity:  SI1","Clarity:  VS2","Clarity:  VS2","Clarity:  VS1","Clarity:  VVS1","Clarity:  VS1","Clarity:  SI2","Clarity:  VVS1","Clarity:  VS2","Clarity:  SI1","Clarity:  SI1","Clarity:  VS1","Clarity:  VS2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI1","Clarity:  VS2","Clarity:  SI2","Clarity:  VS1","Clarity:  SI1","Clarity:  VS2","Clarity:  VVS2","Clarity:  VS2","Clarity:  VS1","Clarity:  VS2","Clarity:  VS2","Clarity:  VS2","Clarity:  SI2","Clarity:  SI1","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  VS1","Clarity:  SI1","Clarity:  VS2","Clarity:  SI2","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  VVS1","Clarity:  SI1","Clarity:  SI1","Clarity:  VS1","Clarity:  VS2","Clarity:  SI1","Clarity:  SI2","Clarity:  IF","Clarity:  VS1","Clarity:  VS1","Clarity:  VVS2","Clarity:  VVS1","Clarity:  VS2","Clarity:  VS2","Clarity:  VS1","Clarity:  IF","Clarity:  VS2","Clarity:  VS1","Clarity:  VS2","Clarity:  VVS1","Clarity:  VS1","Clarity:  I1","Clarity:  SI1","Clarity:  VS2","Clarity:  VVS2","Clarity:  SI1","Clarity:  VVS2","Clarity:  VS2","Clarity:  I1","Clarity:  IF","Clarity:  I1","Clarity:  VS1","Clarity:  VS2","Clarity:  SI1","Clarity:  SI2","Clarity:  VS1","Clarity:  SI1","Clarity:  VS2","Clarity:  VS2","Clarity:  VS2","Clarity:  VVS1","Clarity:  SI2","Clarity:  VS2","Clarity:  SI2","Clarity:  SI2","Clarity:  VS1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  VS2","Clarity:  VS1","Clarity:  SI1","Clarity:  VS2","Clarity:  SI2","Clarity:  SI2","Clarity:  VVS1","Clarity:  VS2","Clarity:  VVS1","Clarity:  VS1","Clarity:  VVS1","Clarity:  SI2","Clarity:  VS2","Clarity:  SI1","Clarity:  SI1","Clarity:  VVS1","Clarity:  VVS2","Clarity:  VVS2","Clarity:  IF","Clarity:  VVS2","Clarity:  SI1","Clarity:  VS2","Clarity:  VVS1","Clarity:  VS1","Clarity:  SI2","Clarity:  VVS2","Clarity:  VVS2","Clarity:  VS1","Clarity:  VVS1","Clarity:  VVS1","Clarity:  VVS2","Clarity:  SI1","Clarity:  SI1","Clarity:  VVS1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  VVS2","Clarity:  VVS2","Clarity:  VS2","Clarity:  SI2","Clarity:  IF","Clarity:  SI1","Clarity:  IF","Clarity:  SI2","Clarity:  SI2","Clarity:  SI1","Clarity:  SI2","Clarity:  VS1","Clarity:  VS2","Clarity:  VS2","Clarity:  SI1","Clarity:  SI2","Clarity:  IF","Clarity:  VS2","Clarity:  VS1","Clarity:  VVS1","Clarity:  SI2","Clarity:  VVS2","Clarity:  VVS2","Clarity:  SI1","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  IF","Clarity:  IF","Clarity:  IF","Clarity:  SI1","Clarity:  VVS2","Clarity:  SI1","Clarity:  VS1","Clarity:  SI2","Clarity:  VS2","Clarity:  VS1","Clarity:  SI2","Clarity:  VS1","Clarity:  VS2","Clarity:  VS1","Clarity:  VS1","Clarity:  VS2","Clarity:  VS1","Clarity:  VVS1","Clarity:  VVS1","Clarity:  VS2","Clarity:  VS1","Clarity:  SI2","Clarity:  VS1","Clarity:  VS1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI2","Clarity:  VVS2","Clarity:  VVS1","Clarity:  VVS1","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  SI1","Clarity:  VVS2","Clarity:  VVS2","Clarity:  VVS2","Clarity:  VS1","Clarity:  VS2","Clarity:  VS2","Clarity:  VVS2","Clarity:  SI2","Clarity:  SI2","Clarity:  VS2","Clarity:  VS2","Clarity:  VS1","Clarity:  VS2","Clarity:  VS2","Clarity:  SI2","Clarity:  SI2","Clarity:  SI1","Clarity:  VVS1","Clarity:  SI1","Clarity:  I1","Clarity:  VVS2","Clarity:  VVS1","Clarity:  VVS1","Clarity:  SI1","Clarity:  VVS2","Clarity:  SI1","Clarity:  VVS2","Clarity:  I1","Clarity:  VVS2","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  VS2","Clarity:  VVS1","Clarity:  VVS1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI2","Clarity:  VS1","Clarity:  VVS1","Clarity:  SI2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI1","Clarity:  VVS2","Clarity:  SI2","Clarity:  SI1","Clarity:  VS2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI2","Clarity:  VS2","Clarity:  VS2","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  SI1","Clarity:  SI2","Clarity:  VVS1","Clarity:  VVS2","Clarity:  VS1","Clarity:  SI1","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  VVS1","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  VVS2","Clarity:  SI2","Clarity:  VS2","Clarity:  VVS2","Clarity:  SI1","Clarity:  SI2","Clarity:  VS1","Clarity:  VS1","Clarity:  SI1","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  VVS2","Clarity:  SI1","Clarity:  SI2","Clarity:  VVS1","Clarity:  VS2","Clarity:  SI1","Clarity:  SI2","Clarity:  VVS1","Clarity:  VVS2","Clarity:  SI2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI1","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  VS1","Clarity:  SI2","Clarity:  SI2","Clarity:  SI1","Clarity:  VS2","Clarity:  IF","Clarity:  VS2","Clarity:  VS1","Clarity:  VS2","Clarity:  VVS2","Clarity:  SI2","Clarity:  SI2","Clarity:  SI1","Clarity:  VS1","Clarity:  VS1","Clarity:  SI2","Clarity:  SI2","Clarity:  VS2","Clarity:  SI1","Clarity:  VS1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  SI1","Clarity:  IF","Clarity:  VS1","Clarity:  IF","Clarity:  IF","Clarity:  VS1","Clarity:  VS2","Clarity:  SI2","Clarity:  VS2","Clarity:  VS1","Clarity:  SI1","Clarity:  VS2","Clarity:  VVS1","Clarity:  VS2","Clarity:  IF","Clarity:  VS2","Clarity:  SI1","Clarity:  IF","Clarity:  SI2","Clarity:  VS2","Clarity:  SI1","Clarity:  VS2","Clarity:  SI2","Clarity:  VVS2","Clarity:  SI2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI1","Clarity:  SI1","Clarity:  VS1","Clarity:  VVS1","Clarity:  IF","Clarity:  VVS2","Clarity:  VVS2","Clarity:  SI1","Clarity:  VS1","Clarity:  SI2","Clarity:  VS1","Clarity:  VS2","Clarity:  VS2","Clarity:  VVS2","Clarity:  VS2","Clarity:  SI1","Clarity:  VS1","Clarity:  SI2","Clarity:  VS2","Clarity:  SI2","Clarity:  SI2","Clarity:  VS2","Clarity:  VS1","Clarity:  VVS2","Clarity:  SI2","Clarity:  VVS2","Clarity:  SI1","Clarity:  SI1","Clarity:  VS2","Clarity:  SI1","Clarity:  SI1","Clarity:  VVS2","Clarity:  VS2","Clarity:  VVS2","Clarity:  VVS1","Clarity:  VVS2","Clarity:  SI1","Clarity:  VS1","Clarity:  VS2","Clarity:  SI1","Clarity:  SI1","Clarity:  VS2","Clarity:  SI1","Clarity:  VS1","Clarity:  VS2","Clarity:  VS2","Clarity:  SI1","Clarity:  VVS2","Clarity:  VS1","Clarity:  VS2","Clarity:  VVS2","Clarity:  VS2","Clarity:  VS1","Clarity:  SI1","Clarity:  SI2","Clarity:  VVS2","Clarity:  VS1","Clarity:  VS1","Clarity:  SI2","Clarity:  VS2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI1","Clarity:  SI2","Clarity:  SI1","Clarity:  VS1","Clarity:  IF","Clarity:  SI2","Clarity:  SI2","Clarity:  SI1","Clarity:  SI1","Clarity:  SI2","Clarity:  VVS2","Clarity:  VS2","Clarity:  VVS2","Clarity:  VS1","Clarity:  SI2","Clarity:  VVS2","Clarity:  VS2","Clarity:  VVS2","Clarity:  VVS2","Clarity:  VVS1","Clarity:  SI1","Clarity:  SI1","Clarity:  VS1","Clarity:  VVS1","Clarity:  VS1","Clarity:  SI1","Clarity:  I1","Clarity:  IF"],"type":"scatter","mode":"markers","marker":{"size":[41.2244897959184,12.7551020408163,13.2142857142857,45.3571428571429,48.5714285714286,21.9387755102041,26.9897959183673,51.3265306122449,13.2142857142857,61.8877551020408,31.5816326530612,13.2142857142857,31.1224489795918,47.1938775510204,17.8061224489796,40.3061224489796,44.8979591836735,68.3163265306122,46.734693877551,91.2755102040816,40.3061224489796,54.0816326530612,40.3061224489796,13.2142857142857,17.3469387755102,17.8061224489796,10.9183673469388,47.1938775510204,31.5816326530612,27.4489795918367,69.234693877551,41.2244897959184,22.3979591836735,14.1326530612245,92.6530612244898,40.3061224489796,94.4897959183673,21.9387755102041,26.0714285714286,16.4285714285714,25.1530612244898,45.3571428571429,15.5102040816327,21.9387755102041,13.2142857142857,41.2244897959184,44.8979591836735,95.4081632653061,91.2755102040816,69.6938775510204,22.3979591836735,31.1224489795918,31.5816326530612,26.9897959183673,22.8571428571429,33.4183673469388,14.1326530612245,16.8877551020408,13.6734693877551,17.8061224489796,24.6938775510204,22.8571428571429,21.9387755102041,13.2142857142857,45.3571428571429,40.3061224489796,40.3061224489796,24.234693877551,14.1326530612245,44.8979591836735,15.5102040816327,49.9489795918367,73.8265306122449,18.7244897959184,68.3163265306122,45.3571428571429,24.234693877551,31.5816326530612,43.9795918367347,31.1224489795918,22.3979591836735,15.969387755102,13.2142857142857,40.3061224489796,19.1836734693878,46.2755102040816,44.8979591836735,21.9387755102041,46.2755102040816,49.030612244898,21.9387755102041,32.0408163265306,47.6530612244898,12.7551020408163,22.8571428571429,61.4285714285714,33.8775510204082,40.3061224489796,94.9489795918367,43.0612244897959,15.5102040816327,12.7551020408163,13.2142857142857,47.1938775510204,35.7142857142857,47.1938775510204,91.2755102040816,45.3571428571429,90.8163265306122,12.7551020408163,72.4489795918367,49.4897959183673,31.1224489795918,18.265306122449,12.7551020408163,45.3571428571429,45.3571428571429,45.8163265306122,31.1224489795918,22.3979591836735,16.4285714285714,25.6122448979592,16.4285714285714,67.8571428571429,16.4285714285714,54.0816326530612,17.8061224489796,12.7551020408163,32.5,54.5408163265306,31.1224489795918,15.5102040816327,90.8163265306122,13.2142857142857,12.7551020408163,49.9489795918367,17.3469387755102,31.5816326530612,23.3163265306122,18.265306122449,22.3979591836735,60.969387755102,22.8571428571429,67.8571428571429,12.7551020408163,67.8571428571429,83.0102040816327,19.6428571428571,17.3469387755102,32.5,14.5918367346939,23.3163265306122,23.3163265306122,58.2142857142857,12.7551020408163,91.2755102040816,47.1938775510204,53.1632653061224,14.1326530612245,18.7244897959184,12.7551020408163,14.5918367346939,17.3469387755102,22.8571428571429,100,92.6530612244898,12.2959183673469,46.2755102040816,17.8061224489796,14.1326530612245,55,97.2448979591837,31.5816326530612,13.2142857142857,34.7959183673469,32.0408163265306,12.7551020408163,12.7551020408163,12.7551020408163,15.969387755102,58.6734693877551,13.2142857142857,12.7551020408163,91.2755102040816,13.2142857142857,32.0408163265306,24.234693877551,31.5816326530612,45.3571428571429,54.0816326530612,64.1836734693877,22.8571428571429,14.1326530612245,67.8571428571429,15.969387755102,32.0408163265306,12.7551020408163,57.7551020408163,33.4183673469388,24.234693877551,13.6734693877551,40.765306122449,16.8877551020408,54.0816326530612,38.9285714285714,40.3061224489796,13.6734693877551,24.234693877551,17.3469387755102,12.7551020408163,49.030612244898,13.6734693877551,16.4285714285714,45.3571428571429,21.9387755102041,40.3061224489796,31.1224489795918,12.7551020408163,12.7551020408163,13.6734693877551,42.6020408163265,12.7551020408163,13.2142857142857,13.2142857142857,12.7551020408163,68.3163265306122,70.6122448979592,38.0102040816327,17.3469387755102,50.4081632653061,14.1326530612245,46.2755102040816,14.5918367346939,60.969387755102,13.2142857142857,32.9591836734694,40.765306122449,26.0714285714286,22.3979591836735,13.2142857142857,23.7755102040816,78.4183673469388,12.7551020408163,21.9387755102041,20.1020408163265,49.4897959183673,13.6734693877551,68.3163265306122,13.6734693877551,22.8571428571429,10.4591836734694,13.2142857142857,21.9387755102041,67.8571428571429,15.969387755102,13.2142857142857,26.0714285714286,14.5918367346939,17.3469387755102,17.8061224489796,49.9489795918367,45.3571428571429,12.7551020408163,49.9489795918367,67.8571428571429,17.3469387755102,18.265306122449,17.3469387755102,13.6734693877551,18.7244897959184,37.0918367346939,21.4795918367347,33.8775510204082,31.1224489795918,34.7959183673469,44.8979591836735,15.969387755102,39.3877551020408,11.3775510204082,17.8061224489796,28.8265306122449,54.5408163265306,12.7551020408163,67.8571428571429,14.1326530612245,34.3367346938775,31.5816326530612,32.0408163265306,23.3163265306122,18.265306122449,94.4897959183673,22.3979591836735,67.8571428571429,93.5714285714286,10.9183673469388,10.4591836734694,23.7755102040816,13.2142857142857,45.8163265306122,69.6938775510204,44.8979591836735,67.8571428571429,91.2755102040816,13.6734693877551,44.8979591836735,32.0408163265306,92.1938775510204,46.2755102040816,54.5408163265306,10.4591836734694,15.0510204081633,31.1224489795918,12.7551020408163,21.9387755102041,31.5816326530612,14.5918367346939,35.2551020408163,10,62.8061224489796,22.3979591836735,41.6836734693878,54.5408163265306,64.6428571428571,45.3571428571429,18.7244897959184,15.5102040816327,91.734693877551,59.1326530612245,31.5816326530612,36.1734693877551,12.7551020408163,45.8163265306122,14.5918367346939,45.3571428571429,41.2244897959184,67.8571428571429,40.3061224489796,68.3163265306122,45.8163265306122,15.969387755102,91.734693877551,17.3469387755102,22.8571428571429,16.4285714285714,32.9591836734694,13.2142857142857,19.1836734693878,54.0816326530612,46.734693877551,13.2142857142857,13.6734693877551,73.8265306122449,31.1224489795918,42.1428571428571,54.0816326530612,31.1224489795918,45.8163265306122,25.1530612244898,37.5510204081633,45.8163265306122,31.1224489795918,49.9489795918367,12.7551020408163,45.3571428571429,95.8673469387755,40.3061224489796,15.5102040816327,46.2755102040816,32.9591836734694,34.3367346938775,49.030612244898,40.3061224489796,68.3163265306122,93.1122448979592,19.1836734693878,20.5612244897959,45.3571428571429,12.7551020408163,40.3061224489796,53.6224489795918,67.8571428571429,45.3571428571429,14.5918367346939,26.9897959183673,31.5816326530612,12.7551020408163,16.4285714285714,16.8877551020408,12.7551020408163,16.8877551020408,77.0408163265306,44.8979591836735,14.5918367346939,17.3469387755102,13.2142857142857,17.8061224489796,45.3571428571429,15.0510204081633,12.7551020408163,33.8775510204082,17.3469387755102,45.3571428571429,20.1020408163265,45.8163265306122,22.8571428571429,55,12.7551020408163,21.9387755102041,44.8979591836735,68.3163265306122,23.3163265306122,15.0510204081633,12.7551020408163,45.3571428571429,18.7244897959184,22.3979591836735,68.3163265306122,40.3061224489796,31.5816326530612,23.3163265306122,15.969387755102,12.7551020408163,24.6938775510204,17.3469387755102,17.3469387755102,48.1122448979592,23.3163265306122,45.3571428571429,46.2755102040816,68.7755102040816,31.1224489795918,67.8571428571429,45.3571428571429,27.4489795918367,45.3571428571429,51.7857142857143,29.2857142857143,31.5816326530612,31.1224489795918,10.4591836734694,15.969387755102,25.6122448979592,10.9183673469388,13.6734693877551,91.2755102040816,18.7244897959184,17.8061224489796,69.234693877551,68.3163265306122,46.2755102040816,31.1224489795918,31.5816326530612,13.2142857142857,55.9183673469388,22.8571428571429,51.7857142857143,50.4081632653061,55,67.8571428571429,13.2142857142857,55,17.8061224489796,21.9387755102041,17.8061224489796,44.8979591836735,12.7551020408163,59.1326530612245,56.8367346938775,46.734693877551,90.8163265306122,21.9387755102041,46.734693877551,31.5816326530612,55.4591836734694,17.3469387755102,31.1224489795918,17.8061224489796,90.8163265306122,40.3061224489796,36.6326530612245,54.5408163265306,23.7755102040816,76.5816326530612,13.2142857142857,34.3367346938775,21.9387755102041,23.7755102040816,55,45.3571428571429,40.3061224489796,17.3469387755102,24.6938775510204,69.6938775510204,17.3469387755102,16.4285714285714,31.5816326530612,24.234693877551,91.734693877551,44.8979591836735,12.7551020408163],"sizemode":"area","colorbar":{"title":"carat","ticklen":2},"cmin":0.24,"cmax":2.2,"colorscale":[["0","rgba(68,1,84,1)"],["0.0306122448979592","rgba(70,14,94,1)"],["0.0306122448979592","rgba(70,14,94,1)"],["0.0357142857142857","rgba(70,16,95,1)"],["0.0459183673469388","rgba(70,20,99,1)"],["0.0612244897959184","rgba(71,25,104,1)"],["0.076530612244898","rgba(71,30,109,1)"],["0.086734693877551","rgba(72,33,112,1)"],["0.102040816326531","rgba(72,37,117,1)"],["0.137755102040816","rgba(71,49,124,1)"],["0.147959183673469","rgba(70,52,126,1)"],["0.173469387755102","rgba(68,60,130,1)"],["0.23469387755102","rgba(61,77,138,1)"],["0.239795918367347","rgba(61,79,138,1)"],["0.275510204081633","rgba(57,89,139,1)"],["0.336734693877551","rgba(49,105,142,1)"],["0.387755102040816","rgba(45,117,142,1)"],["0.392857142857143","rgba(45,118,142,1)"],["0.403061224489796","rgba(44,120,142,1)"],["0.443877551020408","rgba(38,130,142,1)"],["0.494897959183673","rgba(37,143,140,1)"],["0.605229591836735","rgba(43,169,130,1)"],["0.647959183673469","rgba(51,179,124,1)"],["0.903061224489796","rgba(190,223,43,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[0.92,0.3,0.31,1.01,1.08,0.5,0.61,1.14,0.31,1.37,0.71,0.31,0.7,1.05,0.41,0.9,1,1.51,1.04,2.01,0.9,1.2,0.9,0.31,0.4,0.41,0.26,1.05,0.71,0.62,1.53,0.92,0.51,0.33,2.04,0.9,2.08,0.5,0.59,0.38,0.57,1.01,0.36,0.5,0.31,0.92,1,2.1,2.01,1.54,0.51,0.7,0.71,0.61,0.52,0.75,0.33,0.39,0.32,0.41,0.56,0.52,0.5,0.31,1.01,0.9,0.9,0.55,0.33,1,0.36,1.11,1.63,0.43,1.51,1.01,0.55,0.71,0.98,0.7,0.51,0.37,0.31,0.9,0.44,1.03,1,0.5,1.03,1.09,0.5,0.72,1.06,0.3,0.52,1.36,0.76,0.9,2.09,0.96,0.36,0.3,0.31,1.05,0.8,1.05,2.01,1.01,2,0.3,1.6,1.1,0.7,0.42,0.3,1.01,1.01,1.02,0.7,0.51,0.38,0.58,0.38,1.5,0.38,1.2,0.41,0.3,0.73,1.21,0.7,0.36,2,0.31,0.3,1.11,0.4,0.71,0.53,0.42,0.51,1.35,0.52,1.5,0.3,1.5,1.83,0.45,0.4,0.73,0.34,0.53,0.53,1.29,0.3,2.01,1.05,1.18,0.33,0.43,0.3,0.34,0.4,0.52,2.2,2.04,0.29,1.03,0.41,0.33,1.22,2.14,0.71,0.31,0.78,0.72,0.3,0.3,0.3,0.37,1.3,0.31,0.3,2.01,0.31,0.72,0.55,0.71,1.01,1.2,1.42,0.52,0.33,1.5,0.37,0.72,0.3,1.28,0.75,0.55,0.32,0.91,0.39,1.2,0.87,0.9,0.32,0.55,0.4,0.3,1.09,0.32,0.38,1.01,0.5,0.9,0.7,0.3,0.3,0.32,0.95,0.3,0.31,0.31,0.3,1.51,1.56,0.85,0.4,1.12,0.33,1.03,0.34,1.35,0.31,0.74,0.91,0.59,0.51,0.31,0.54,1.73,0.3,0.5,0.46,1.1,0.32,1.51,0.32,0.52,0.25,0.31,0.5,1.5,0.37,0.31,0.59,0.34,0.4,0.41,1.11,1.01,0.3,1.11,1.5,0.4,0.42,0.4,0.32,0.43,0.83,0.49,0.76,0.7,0.78,1,0.37,0.88,0.27,0.41,0.65,1.21,0.3,1.5,0.33,0.77,0.71,0.72,0.53,0.42,2.08,0.51,1.5,2.06,0.26,0.25,0.54,0.31,1.02,1.54,1,1.5,2.01,0.32,1,0.72,2.03,1.03,1.21,0.25,0.35,0.7,0.3,0.5,0.71,0.34,0.79,0.24,1.39,0.51,0.93,1.21,1.43,1.01,0.43,0.36,2.02,1.31,0.71,0.81,0.3,1.02,0.34,1.01,0.92,1.5,0.9,1.51,1.02,0.37,2.02,0.4,0.52,0.38,0.74,0.31,0.44,1.2,1.04,0.31,0.32,1.63,0.7,0.94,1.2,0.7,1.02,0.57,0.84,1.02,0.7,1.11,0.3,1.01,2.11,0.9,0.36,1.03,0.74,0.77,1.09,0.9,1.51,2.05,0.44,0.47,1.01,0.3,0.9,1.19,1.5,1.01,0.34,0.61,0.71,0.3,0.38,0.39,0.3,0.39,1.7,1,0.34,0.4,0.31,0.41,1.01,0.35,0.3,0.76,0.4,1.01,0.46,1.02,0.52,1.22,0.3,0.5,1,1.51,0.53,0.35,0.3,1.01,0.43,0.51,1.51,0.9,0.71,0.53,0.37,0.3,0.56,0.4,0.4,1.07,0.53,1.01,1.03,1.52,0.7,1.5,1.01,0.62,1.01,1.15,0.66,0.71,0.7,0.25,0.37,0.58,0.26,0.32,2.01,0.43,0.41,1.53,1.51,1.03,0.7,0.71,0.31,1.24,0.52,1.15,1.12,1.22,1.5,0.31,1.22,0.41,0.5,0.41,1,0.3,1.31,1.26,1.04,2,0.5,1.04,0.71,1.23,0.4,0.7,0.41,2,0.9,0.82,1.21,0.54,1.69,0.31,0.77,0.5,0.54,1.22,1.01,0.9,0.4,0.56,1.54,0.4,0.38,0.71,0.55,2.02,1,0.3],"line":{"color":"transparent"}},"xaxis":"x","yaxis":"y","frame":null,"name":[]},{"x":[0.24,2.2],"y":[373,18729],"type":"scatter","mode":"markers","opacity":0,"hoverinfo":"none","showlegend":false,"marker":{"colorbar":{"title":"carat","ticklen":2,"len":0.5,"y":1,"lenmode":"fraction","yanchor":"top"},"cmin":0.24,"cmax":2.2,"colorscale":[["0","rgba(68,1,84,1)"],["0.0306122448979592","rgba(70,14,94,1)"],["0.0306122448979592","rgba(70,14,94,1)"],["0.0357142857142857","rgba(70,16,95,1)"],["0.0459183673469388","rgba(70,20,99,1)"],["0.0612244897959184","rgba(71,25,104,1)"],["0.076530612244898","rgba(71,30,109,1)"],["0.086734693877551","rgba(72,33,112,1)"],["0.102040816326531","rgba(72,37,117,1)"],["0.137755102040816","rgba(71,49,124,1)"],["0.147959183673469","rgba(70,52,126,1)"],["0.173469387755102","rgba(68,60,130,1)"],["0.23469387755102","rgba(61,77,138,1)"],["0.239795918367347","rgba(61,79,138,1)"],["0.275510204081633","rgba(57,89,139,1)"],["0.336734693877551","rgba(49,105,142,1)"],["0.387755102040816","rgba(45,117,142,1)"],["0.392857142857143","rgba(45,118,142,1)"],["0.403061224489796","rgba(44,120,142,1)"],["0.443877551020408","rgba(38,130,142,1)"],["0.494897959183673","rgba(37,143,140,1)"],["0.605229591836735","rgba(43,169,130,1)"],["0.647959183673469","rgba(51,179,124,1)"],["0.903061224489796","rgba(190,223,43,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"color":[0.24,2.2]},"xaxis":"x","yaxis":"y","frame":null,"name":[]}],"highlight":{"on":"plotly_selected","off":"plotly_relayout","persistent":false,"dynamic":false,"color":null,"selectize":false,"defaultValues":null,"opacityDim":0.2,"hoverinfo":null,"showInLegend":false},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":{"render":[{"code":"function(el, x) {\n    var ctConfig = crosstalk.var('plotlyCrosstalkOpts').set({\"on\":\"plotly_selected\",\"off\":\"plotly_relayout\",\"persistent\":false,\"dynamic\":false,\"color\":{},\"selectize\":false,\"defaultValues\":{},\"opacityDim\":0.2,\"hoverinfo\":{},\"showInLegend\":false});\n  }","data":null}]}}</script>
+]
+
+---
+#Writing Documents/Books/Websites/Presentations!
+This entire presentation was written in R &amp; Rstudio using markdown, inline R code, and an R package that uses a javascript presentation engine.
+
+.big_text[* Write in Markdown.
+* Write native code in R.
+* Use **knitr** and pandoc to create a wealth of formats!
+* Keep data, analysis and writing in one place!]
+
+---
+
+# The Package Ecosystem linking all the things!
+.pull-left[.big_text[
+* Google Drive!
+
+* Search engines!
+
+* Countless APIs!
+
+* Databases!]]
+
+.pull-right[![package](images/rpackages.jpeg)]
+
+
+
+---
+
+
+```r
+library(googlesheets)
+ gs_title("CEAB Enrolment 2011-2015") %&gt;% 
+  gs_read("total_enrolment")
+```
+
+```
+## # A tibble: 96 × 17
+##    enrolment_type Institution Biosystems Chemical Civil Computer
+##             &lt;chr&gt;       &lt;chr&gt;      &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;
+## 1           total      Acadia         NA       NA    NA       NA
+## 2           total     Alberta         NA      603   648      188
+## 3           total        BCIT         NA       NA   190       NA
+## 4           total     Calgary         NA      350   364       NA
+## 5           total Cape Breton         NA       NA    NA       NA
+## 6           total    Carleton        167        0   802      302
+## 7           total   Concordia         NA       NA   999      187
+## 8           total   Conestoga         NA       NA    NA       57
+## 9           total         Dal         NA      102   116       NA
+## 10          total         ETS         NA       NA  1589       NA
+## # ... with 86 more rows, and 11 more variables: Electrical &lt;dbl&gt;,
+## #   `Engineering Physics` &lt;int&gt;, Environmental &lt;int&gt;, Geological &lt;int&gt;,
+## #   `Industrial or Manufacturing` &lt;int&gt;, `Materials or
+## #   Metallurgical` &lt;int&gt;, Mechanical &lt;dbl&gt;, `Mining or Mineral` &lt;int&gt;,
+## #   Software &lt;int&gt;, Other &lt;int&gt;, `Year One/Two Common Year` &lt;int&gt;
+```
+
+---
+
+
+```r
+library(DBI)
+quiver &lt;- RSQLServer::src_sqlserver("FEAS", database = "quiver")
+ 
+quiver %&gt;% 
+  tbl("course_au")
+```
+
+```
+## Source:   query [?? x 21]
+## Database: SQLServer 11.0.6020 [kauppj@mssql.appsci.queensu.ca:1433/quiver]
+## 
+##    academic_year subject catalog
+##            &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;
+## 1      2016-2017    APSC     100
+## 2      2016-2017    APSC     101
+## 3      2016-2017    APSC     102
+## 4      2016-2017    APSC     103
+## 5      2016-2017    APSC     111
+## 6      2016-2017    APSC     112
+## 7      2016-2017    APSC     131
+## 8      2016-2017    APSC     132
+## 9      2016-2017    APSC     142
+## 10     2016-2017    APSC     151
+## # ... with more rows, and 18 more variables: course_title &lt;chr&gt;,
+## #   semester &lt;chr&gt;, credit &lt;chr&gt;, k_factor &lt;chr&gt;, lecture &lt;chr&gt;,
+## #   lab &lt;chr&gt;, tutorial &lt;chr&gt;, deleted &lt;chr&gt;, math &lt;chr&gt;, ns &lt;chr&gt;,
+## #   cs &lt;chr&gt;, es &lt;chr&gt;, ed &lt;chr&gt;, status &lt;chr&gt;, course_ps_id_1 &lt;chr&gt;,
+## #   course_ps_id_2 &lt;chr&gt;, program_oid &lt;chr&gt;, course &lt;chr&gt;
+```
+
+---
+
+#Sophisticated analytical workflows!
+Keep everything from data to results in one place!
+
+
+```r
+library(tidyverse)
+
+analysis &lt;- mtcars %&gt;% 
+  group_by(cyl) %&gt;% 
+  nest() %&gt;% 
+  mutate(model = map(data,~ lm(mpg ~ wt, data = .))) %&gt;% 
+  mutate(results = map(model, broom::tidy))
+
+analysis$results[[1]]
+```
+
+```
+##          term  estimate std.error statistic     p.value
+## 1 (Intercept) 28.408845  4.184369  6.789278 0.001054844
+## 2          wt -2.780106  1.334917 -2.082605 0.091757660
+```
+
+---
+# Write your own packages!
+
+.pull-left[
+
+```r
+library(NSSEr)
+file &lt;- "/Users/Jake/ownCloud/FEAS/NSSE/data/ENG//NSSE 2014 Engineering.xlsx"
+
+nsse_tidy_workbook(file) %&gt;% 
+   nsse_compare_indicators() %&gt;% 
+   nsse_indicator_slopegraph()
+```
+]
+.pull-right[![nsse](images/slope.png)]
+
+---
+class: center, middle
+
+.pull-left[# Web Applications!
+
+[.big_text[Reactivity and Interaction in R-powered apps]](http://shiny.engineering.queensu.ca)]
+
+![shiny](images/shinyhex.png)
+
+---
+class: left, middle, inverse
+
+# So how do I learn R?
+
+---
+
+# A R-user group at Queen's is starting up!
+
+* Collaboration between Me and Jeff Stafford of the Center for Advanced Computing
+* Offering Training for Researchers, Professors, Students
+* Teaching sessions and drop-ins!
+* Get more people using the tools, techniques and workflows behind scientific computing!
+
+---
+class: left, middle, inverse
+
+#Thank you!
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
